@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+<style>
+    #output{
+        height:400px;
+        overflow: auto;
+    }
+</style>
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<div>
+    <!-- チャット受信文字列 -->
+    <h2 style="font: size 24px;">オクチャット</h2>
+    <div id="output"></div>
+    <div>名前<input type="text" id="username"></div>
+    <div>
+        <textarea id="text" rows="5"></textarea>
+        <button id="send">送信</button>
+    </div>
+</div>
+
+
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyApzoVtUPo2hgeLqkzrqCPNKdwzpa2vf_o",
+        authDomain: "dev12-2e2d6.firebaseapp.com",
+        databaseURL: "https://dev12-2e2d6.firebaseio.com",
+        projectId: "dev12-2e2d6",
+        storageBucket: "dev12-2e2d6.appspot.com",
+        messagingSenderId: "77885909495"
+    };
+    firebase.initializeApp(config);
+
+    var newPostRef = firebase.database().ref();
+
+    function ymd(){
+        let d = new Date();
+        return d.getHours() + ":" + d.getMinutes();
+    }
+
+    function msgPush(){
+        let date = ymd();
+        newPostRef.push({
+            username: $("#username").val(),
+            date: date,
+            text: $("#text").val()
+        });
+        $("#text").val("");
+        $("#output").scrollTop( $("#output")[0].scrollHeight );
+    }
+
+
+    //送信用イベント
+    $("#send").on("click", function(){
+        msgPush();
+    });
+
+    //Enterで送信
+    $("#text").on("keydown", function(e){
+        if(e.keyCode==13){
+           msgPush();
+        }
+    });
+
+    //受信
+    newPostRef.on('child_added', function(data){
+        let v = data.val();
+        let k = data.key;
+
+        let str = '<p>' + v.username + '<br>' + v.date + '<br>' + v.text + '</p>';
+        $("#output").append(str);
+    });
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
