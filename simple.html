@@ -3,25 +3,26 @@
 <head>
 <meta charset="utf-8">
 <title>Chatアプリ</title>
-<style>
-    #output{
-        height:400px;
-        overflow: auto;
-    }
-</style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- コンテンツ表示画面 -->
 <div>
     <!-- チャット受信文字列 -->
-    <h2 style="font: size 24px;">オクチャット</h2>
-    <div id="output"></div>
-    <div>名前<input type="text" id="username"></div>
-    <div>
-        <textarea id="text" rows="5"></textarea>
+    <h2 class="title">オクチャット</h2>
+    <div id="output" class="output"></div>
+    <div class="sending">
+        <textarea id="text" rows="3"></textarea>
         <button id="send">送信</button>
     </div>
+</div>
+
+<div class="userBox">
+    <p>ユーザー</p>
+    <p id="currentUser"></p>
 </div>
 
 
@@ -39,6 +40,8 @@
 
 <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
 <script>
+    $("#currentUser").html(localStorage.getItem("user"));
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyApzoVtUPo2hgeLqkzrqCPNKdwzpa2vf_o",
@@ -60,7 +63,7 @@
     function msgPush(){
         let date = ymd();
         newPostRef.push({
-            username: $("#username").val(),
+            username: localStorage.getItem('user'),
             date: date,
             text: $("#text").val()
         });
@@ -90,10 +93,7 @@
         $("#output").append(str);
     });
 
-
 </script>
-
-
 
 </body>
 </html>
