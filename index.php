@@ -1,3 +1,3 @@
 <?php
-header('Location: /simple.html');
+header('Location: /title.html');
 ?>
