@@ -15,7 +15,9 @@
     <h2 class="title">オクチャット</h2>
     <div id="output" class="output"></div>
     <div class="sending">
-        <textarea id="text" rows="3"></textarea>
+        <div class="form-group has-success">
+            <textarea class="form-control" id="text" rows="3"></textarea>
+        </div>
         <button id="send">送信</button>
     </div>
 </div>
@@ -89,7 +91,9 @@
         let v = data.val();
         let k = data.key;
 
-        let str = '<p>' + v.username + '　' + v.date + '<br>' + v.text + '</p>';
+        let str = '<div class="well well-sm" id="post"><p>'
+            + '<span class="fontsize">' + v.username + '</span>　'
+            + v.date + '<br>' + '<span class="fontsize">' + v.text + '</span></p></div>';
         $("#output").append(str);
     });
 
