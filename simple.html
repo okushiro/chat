@@ -10,15 +10,15 @@
 <body>
 
 <!-- コンテンツ表示画面 -->
-<div>
+<h2 class="title">オクチャット</h2>
+<div class="chatboard">
     <!-- チャット受信文字列 -->
-    <h2 class="title">オクチャット</h2>
     <div id="output" class="output"></div>
     <div class="sending">
         <div class="form-group has-success">
             <textarea class="form-control" id="text" rows="3"></textarea>
         </div>
-        <button id="send">送信</button>
+        <button id="send" class="btn btn-success">送信</button>
     </div>
 </div>
 
@@ -93,8 +93,13 @@
         let v = data.val();
         let k = data.key;
 
-        if(v.username){
-            let str = '<div class="well well-sm" id="post"><p>'
+        if(v.username==localStorage.getItem("user")){
+            let str = '<div class="well well-sm orange" id="post"><p>'
+            + '<span class="fontsize">' + v.username + '</span>　'
+            + v.date + '<br>' + '<span class="fontsize">' + v.text + '</span></p></div>';
+            $("#output").append(str);
+        }else if(v.username){
+            let str = '<div class="well well-sm blue" id="post"><p>'
             + '<span class="fontsize">' + v.username + '</span>　'
             + v.date + '<br>' + '<span class="fontsize">' + v.text + '</span></p></div>';
             $("#output").append(str);
