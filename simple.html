@@ -27,6 +27,8 @@
     <p id="currentUser"></p>
 </div>
 
+<div id="map"></div>
+
 
 
 <!--/ コンテンツ表示画面 -->
@@ -91,45 +93,20 @@
         let v = data.val();
         let k = data.key;
 
-        let str = '<div class="well well-sm" id="post"><p>'
+        if(v.username){
+            let str = '<div class="well well-sm" id="post"><p>'
             + '<span class="fontsize">' + v.username + '</span>　'
             + v.date + '<br>' + '<span class="fontsize">' + v.text + '</span></p></div>';
-        $("#output").append(str);
+            $("#output").append(str);
+        }   
     });
 
 </script>
 
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyAyJnmxy8WHyC01_lfaKfvZQNbf1e8CK10&language=ja"></script>
+<script src="js/map.js"></script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

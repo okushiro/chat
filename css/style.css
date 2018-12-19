@@ -57,3 +57,13 @@ body{
 .fontsize{
     font-size: 18px;
 }
+
+
+#map{
+    width: 50%;
+    height: 400px;
+    position: relative;
+    top: 40px;
+    left: 25%;
+}
+
