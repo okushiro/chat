@@ -20,7 +20,18 @@ function makeMap(lat, lng) {
     var marker = new google.maps.Marker({
         position: latlng, // マーカーを立てる位置を指定
         map: map, // マーカーを立てる地図を指定
-        animation: google.maps.Animation.DROP
+        icon: {
+            url:'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+            labelOrigin: new google.maps.Point(20, 40)  //ラベルの基点
+        },
+        label: {
+            text: localStorage.getItem('user'),         //ラベル文字
+            color: '#ff3366',          //ラベル文字の色
+            fontFamily: 'sans-serif',  //フォント 
+            fontWeight: 'bold',        //フォントの太さ 
+            fontSize: '20px'           //フォントのサイズ 
+        },
+        // animation: google.maps.Animation.DROP
     });
 
     return [map,marker];
@@ -60,7 +71,6 @@ window.onload = function(){
 
         if(v.mapUser){
             makeMap(v.lat, v.lng);
-        }   
-    });
-     
+        }
+    });   
 };
